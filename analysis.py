@@ -63,9 +63,8 @@ data = pd.read_csv("C:\\Users\\shane\\Desktop\\pands\\pands-project\\iris.csv")
 print("\n\n\t\t\t Welcome to the Fisher's Iris data set analysis program")
 print("\n\t\t Aim - project to explore the capabilites of python to manipulate, analyse, display and plot data")
 
-print("\n\t\t\t Author: Shane Keenan - with lots of help from the vast python community")
+print("\n\t\t\t Author: Shane Keenan - with acknowledgement to the help given from the vast python community")
 
-print("\n\t\t\t Author: Shane Keenan - with lots of help from the vast python community")
 print("\nPlease select from the following options")
 
 
@@ -102,15 +101,49 @@ print(select_data.head(10))
 
 print(type(select_data.head(10)))
 
+# indexing to look at specific rows in the data. 
+
+# to select a row by number index - use iloc[]
+print(data.iloc[5])
+
+#to select rows by the attribuete in a certain column index - use loc[]
+print(data.loc[data["class"] == "Iris-setosa"])
+
+# and then select a certain column within the subset 
+setosa= data.loc[data["class"] == "Iris-setosa"]
+select_data=setosa[["sepallength"]]
+print(select_data)
 
 
 
 
+# to count number of times a particular class (or any value) has occurred - use value_counts 
+
+print(data["sepallength"].value_counts())
+
+# calculate some statistics of the data - Sepallength
+
+sum_data = data["sepallength"].sum()
+mean_data = data["sepallength"].mean()
+median_data = data["sepallength"].median()
+  
+print("Sum: {:.2f} \nMean: {:.2f} \nMedian: {:.2f}".format(sum_data,mean_data,median_data))
+
+
+# determine the minimum and maximum from a column 
+min_data=data["sepallength"].min()
+max_data=data["sepallength"].max()
+  
+print("Minimum:",min_data, "\nMaximum:", max_data)
 
 
 
+# rename the columns and formating them 
 
-
-
+newcols={"sepallength":"Sepal Length [cm]","sepalwidth":"Sepal Width [cm]","petallength":"Petal Length [cm]","petalwidth":"Petal Width [cm]","class":"Species"}
+ 
+data.rename(columns=newcols,inplace=True)
+  
+print(data.head())
 
 
