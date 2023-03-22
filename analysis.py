@@ -59,6 +59,19 @@ import pandas as pd
 
 data = pd.read_csv("C:\\Users\\shane\\Desktop\\pands\\pands-project\\iris.csv")
 
+
+print("\n\n\t\t\t Welcome to the Fisher's Iris data set analysis program")
+print("\n\t\t Aim - project to explore the capabilites of python to manipulate, analyse, display and plot data")
+
+print("\n\t\t\t Author: Shane Keenan - with lots of help from the vast python community")
+
+print("\n\t\t\t Author: Shane Keenan - with lots of help from the vast python community")
+print("\nPlease select from the following options")
+
+
+
+
+
 #what type of data is read in
 print(type(data))
 
@@ -80,11 +93,14 @@ print(f'\n\n{(data.shape)}')
 print(f'\n\n{type(data.shape)}')
 
 
+# to select a certain column of the data and assign it to a variable 
 
+select_data=data[["sepallength","sepalwidth"]]
 
+# 
+print(select_data.head(10))
 
-
-
+print(type(select_data.head(10)))
 
 
 
