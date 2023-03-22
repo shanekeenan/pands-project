@@ -53,7 +53,7 @@ but rather to present your code and its output to them.
 #import pands and give it the identifier "pd" - use pd to call this library
 
 import pandas as pd
-
+import seaborn as sns
 # read in the iris.csv file from local drive 
 # reason for \\ in file name -  https://stackoverflow.com/questions/28328052/why-do-i-have-to-use-double-backslashes-for-file-paths-in-code
 
@@ -65,9 +65,69 @@ print("\n\t\t Aim - project to explore the capabilites of python to manipulate, 
 
 print("\n\t\t\t Author: Shane Keenan - with acknowledgement to the help given from the vast python community")
 
+
+# tidy up the data - rename the columns with formated titles
+
+newcols={"sepallength":"Sepal Length [cm]","sepalwidth":"Sepal Width [cm]","petallength":"Petal Length [cm]","petalwidth":"Petal Width [cm]","class":"Species"}
+ 
+data.rename(columns=newcols,inplace=True)
+
+#display details about the Iris data .shape output a tuple with the number of (rows, columns) 
+print(f'\n\nThe Iris dataset contains {(data.shape[0])} rows and {(data.shape[1])} columns')
+
+#print(f'\n\n{type(data.shape)}')
+
+col0 = newcols["sepallength"]
+
+print(f"\nThe columns are labels {col0}")
+
+
+
+print(data.head())
+
+# 
+
+
+def mainMenu():
+    print("What would you like to do with the Iris data set?")
+    print("Please chose from the following options:")
+    print("\t(s) See description/")
+    print("\t(d) Display data")
+    print("\t(a) Analyse data ")
+    print("\t(p) Plot data")
+    print("\t(q) Quit program")
+    choice = input("please select (s/d/a/p/q):")
+    return choice
+
+def description():
+    print("\t(s) data set description/")
+
+def display():
+    print("\t(s) data display/")
+
+def analysis():
+    print("\t(s) data analysis/")
+
+def plot():
+    print("\t(s) data plot/")
+
+choice = mainMenu()
+while choice != "q":
+    if choice == "s":
+        description()
+    elif choice == "d":
+        display()
+    elif choice == "a":
+        analysis()
+    elif choice == "a":
+        plot()
+    else:
+        print ("invalid choice")
+
+print()
+
+
 print("\nPlease select from the following options")
-
-
 
 
 
@@ -138,12 +198,21 @@ print("Minimum:",min_data, "\nMaximum:", max_data)
 
 
 
-# rename the columns and formating them 
 
-newcols={"sepallength":"Sepal Length [cm]","sepalwidth":"Sepal Width [cm]","petallength":"Petal Length [cm]","petalwidth":"Petal Width [cm]","class":"Species"}
- 
-data.rename(columns=newcols,inplace=True)
+
+#check whether there is missing data in the file 
+data.isnull()
+
+
+
+
+
+'''
+print(data.head(10).style.highlight_max(color='lightgreen', axis=0))
   
-print(data.head())
+print(data.head(10).style.highlight_max(color='lightgreen', axis=1))
+  
+print(data.head(10).style.highlight_max(color='lightgreen', axis=None))
+'''
 
-
+sns.pairplot(data,hue="Species")
