@@ -37,6 +37,62 @@ but rather to present your code and its output to them.
 
 '''
 
+# Resources used: 
+# 
+#
+#
+# https://www.geeksforgeeks.org/python-basics-of-pandas-using-iris-dataset/  
+# Iris dataset as .csv and headers from https://datahub.io/machine-learning/iris#resource-iris
+
+# pands is one of many open-source libraries available with python. It is useful for data manipulation and analysis.
+
+# install pands on the system (done once in command window)
+# pip install pandas 
+
+
+#import pands and give it the identifier "pd" - use pd to call this library
+
+import pandas as pd
+
+# read in the iris.csv file from local drive 
+# reason for \\ in file name -  https://stackoverflow.com/questions/28328052/why-do-i-have-to-use-double-backslashes-for-file-paths-in-code
+
+data = pd.read_csv("C:\\Users\\shane\\Desktop\\pands\\pands-project\\iris.csv")
+
+#what type of data is read in
+print(type(data))
+
+# displays the top rows of the dataset -default value of 5 rows - 
+print(data.head(10))
+print(type(data.head(10)))
+
+# displays a random sample of rows of the dataset -default value of 1 rows - 
+print(data.sample(10))
+print(type(data.sample(10)))
+
+# displays the header / column data (if there) - this dataset does have a index in the .csv file.  
+print(f'\n\n{data.columns}')
+print(type(data.columns))
+
+
+# display the shape of the data set - (rows, columns)
+print(f'\n\n{(data.shape)}')
+print(f'\n\n{type(data.shape)}')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
