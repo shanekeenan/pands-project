@@ -73,19 +73,14 @@ newcols={"sepallength":"Sepal Length [cm]","sepalwidth":"Sepal Width [cm]","peta
 data.rename(columns=newcols,inplace=True)
 
 #display details about the Iris data .shape output a tuple with the number of (rows, columns) 
-print(f'\n\nThe Iris dataset contains {(data.shape[0])} rows and {(data.shape[1])} columns')
 
 #print(f'\n\n{type(data.shape)}')
-
-col0 = newcols["sepallength"]
-
-print(f"\nThe columns are labels {col0}")
 
 
 
 print(data.head())
 
-# 
+col0 = newcols["sepallength"]
 
 
 def mainMenu():
@@ -101,6 +96,10 @@ def mainMenu():
 
 def description():
     print("\t(s) data set description/")
+    
+
+    print(f"\nThe columns are labels {col0}")
+    print(f'\n\nThe Iris dataset contains {(data.shape[0])} rows and {(data.shape[1])} columns')
 
 def display():
     print("\t(s) data display/")
