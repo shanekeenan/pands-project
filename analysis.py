@@ -53,17 +53,24 @@ but rather to present your code and its output to them.
 #import pands and give it the identifier "pd" - use pd to call this library
 
 import pandas as pd
+import numpy as np
 import seaborn as sns
+import time # for delays 
 # read in the iris.csv file from local drive 
 # reason for \\ in file name -  https://stackoverflow.com/questions/28328052/why-do-i-have-to-use-double-backslashes-for-file-paths-in-code
 
 data = pd.read_csv("C:\\Users\\shane\\Desktop\\pands\\pands-project\\iris.csv")
 
 
-print("\n\n\t\t\t Welcome to the Fisher's Iris data set analysis program")
-print("\n\t\t Aim - project to explore the capabilites of python to manipulate, analyse, display and plot data")
+print("\n\nWelcome to the Fisher's Iris data set analysis program")
 
-print("\n\t\t\t Author: Shane Keenan - with acknowledgement to the help given from the vast python community")
+time.sleep(2)
+print("\nAuthor: Shane Keenan")
+time.sleep(2)
+print("\nProject for semester 1, Programming and scripting, HDip in Computing in Data Analytics, Lecturer: Andrew Beatty")
+time.sleep(2)
+print("\nThe aim of this project is to explore the capabilites of python to manipulate, analyse, display and plot data\n")
+
 
 
 # tidy up the data - rename the columns with formated titles
@@ -78,7 +85,6 @@ data.rename(columns=newcols,inplace=True)
 
 
 
-print(data.head())
 
 col0 = newcols["sepallength"]
 
@@ -103,6 +109,7 @@ def description():
 
 def display():
     print("\t(s) data display/")
+    print(data.head())
 
 def analysis():
     print("\t(s) data analysis/")
