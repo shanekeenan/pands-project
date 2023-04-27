@@ -59,63 +59,57 @@ import time # for delays
 # read in the iris.csv file from local drive 
 # reason for \\ in file name -  https://stackoverflow.com/questions/28328052/why-do-i-have-to-use-double-backslashes-for-file-paths-in-code
 
-data = pd.read_csv("C:\\Users\\shane\\Desktop\\pands\\pands-project\\iris.csv")
-
-
 print("\n\nWelcome to the Fisher's Iris data set analysis program")
-
 time.sleep(2)
 print("\nAuthor: Shane Keenan")
 time.sleep(2)
-print("\nProject for semester 1, Programming and scripting, HDip in Computing in Data Analytics, Lecturer: Andrew Beatty")
+print("Project for semester 1, Programming and Scripting module, HDip in Computing in Data Analytics, Lecturer: Andrew Beatty")
 time.sleep(2)
 print("\nThe aim of this project is to explore the capabilites of python to manipulate, analyse, display and plot data\n")
-
-
+time.sleep(2)
+#read in the csv file from local drive 
+''' dowwload file and change this path '''
+data = pd.read_csv("C:\\Users\\shane\\Desktop\\pands\\pands-project\\iris.csv")
 
 # tidy up the data - rename the columns with formated titles
-
 newcols={"sepallength":"Sepal Length [cm]","sepalwidth":"Sepal Width [cm]","petallength":"Petal Length [cm]","petalwidth":"Petal Width [cm]","class":"Species"}
- 
 data.rename(columns=newcols,inplace=True)
 
 #display details about the Iris data .shape output a tuple with the number of (rows, columns) 
-
 #print(f'\n\n{type(data.shape)}')
-
-
-
-
 col0 = newcols["sepallength"]
 
-
+# define the main menu function 
 def mainMenu():
     print("What would you like to do with the Iris data set?")
     print("Please chose from the following options:")
-    print("\t(s) See description/")
-    print("\t(d) Display data")
-    print("\t(a) Analyse data ")
+    print("\t(s) See description")
+    print("\t(d) Display raw data")
+    print("\t(a) Statistical analysis ")
     print("\t(p) Plot data")
     print("\t(q) Quit program")
     choice = input("please select (s/d/a/p/q):")
     return choice
 
 def description():
-    print("\t(s) data set description/")
+    print("\n\nData set description")
+    print('The Iris data set is a multivariate data set collated by British statistician and biologist Ronald Fisher. It was first published in his 1936 paper "The use of multiple measurements in taxonomic problems as an example of linear discriminant analysis." ')
+    print('The data set consists of 50 samples from each of three species of Iris (Iris setosa, Iris virginica and Iris versicolor')
     
-
     print(f"\nThe columns are labels {col0}")
     print(f'\n\nThe Iris dataset contains {(data.shape[0])} rows and {(data.shape[1])} columns')
-
 def display():
-    print("\t(s) data display/")
-    print(data.head())
+    print("\nRaw data display")
+    print("Random sample of 10 rows\n")
+    print(data.sample(10),end = "\n\n")
+    #print(data.head())
+
+
 
 def analysis():
-    print("\t(s) data analysis/")
-
+    print("data analysis")
 def plot():
-    print("\t(s) data plot/")
+    print("data plot")
 
 choice = mainMenu()
 while choice != "q":
@@ -129,13 +123,7 @@ while choice != "q":
         plot()
     else:
         print ("invalid choice")
-
-print()
-
-
-print("\nPlease select from the following options")
-
-
+    choice = mainMenu()
 
 #what type of data is read in
 print(type(data))
@@ -152,19 +140,14 @@ print(type(data.sample(10)))
 print(f'\n\n{data.columns}')
 print(type(data.columns))
 
-
 # display the shape of the data set - (rows, columns)
 print(f'\n\n{(data.shape)}')
 print(f'\n\n{type(data.shape)}')
 
-
 # to select a certain column of the data and assign it to a variable 
-
 select_data=data[["sepallength","sepalwidth"]]
 
-# 
 print(select_data.head(10))
-
 print(type(select_data.head(10)))
 
 # indexing to look at specific rows in the data. 
@@ -180,21 +163,15 @@ setosa= data.loc[data["class"] == "Iris-setosa"]
 select_data=setosa[["sepallength"]]
 print(select_data)
 
-
-
-
 # to count number of times a particular class (or any value) has occurred - use value_counts 
-
 print(data["sepallength"].value_counts())
 
 # calculate some statistics of the data - Sepallength
-
 sum_data = data["sepallength"].sum()
 mean_data = data["sepallength"].mean()
 median_data = data["sepallength"].median()
   
 print("Sum: {:.2f} \nMean: {:.2f} \nMedian: {:.2f}".format(sum_data,mean_data,median_data))
-
 
 # determine the minimum and maximum from a column 
 min_data=data["sepallength"].min()
@@ -202,23 +179,12 @@ max_data=data["sepallength"].max()
   
 print("Minimum:",min_data, "\nMaximum:", max_data)
 
-
-
-
-
 #check whether there is missing data in the file 
 data.isnull()
 
-
-
-
-
 '''
 print(data.head(10).style.highlight_max(color='lightgreen', axis=0))
-  
 print(data.head(10).style.highlight_max(color='lightgreen', axis=1))
-  
 print(data.head(10).style.highlight_max(color='lightgreen', axis=None))
 '''
-
 sns.pairplot(data,hue="Species")
