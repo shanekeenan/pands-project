@@ -2,8 +2,6 @@
 # pands project   
 # Author: Shane Keenan
 # Status: ongoing 
-
-
 '''  Problem statement
 This project concerns the well-known Fisher’s Iris data set [3]. 
 You must research the data set and write documentation and code (in Python [1]) to investigate it.
@@ -36,10 +34,9 @@ You have not been asked to create a deck of presentation slides,
 but rather to present your code and its output to them. 
 
 '''
-
 # Resources used: 
+# Iris images and database information : https://en.wikipedia.org/wiki/Iris_flower_data_set
 # 
-#
 #
 # https://www.geeksforgeeks.org/python-basics-of-pandas-using-iris-dataset/  
 # Iris dataset as .csv and headers from https://datahub.io/machine-learning/iris#resource-iris
@@ -50,34 +47,42 @@ but rather to present your code and its output to them.
 # pip install pandas 
 
 
-#import pands and give it the identifier "pd" - use pd to call this library
 
+#import pands and give it the identifier "pd" - use pd to call this library
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 import seaborn as sns
 import time # for delays 
+from PIL import Image # to display jpg files 
+
 # read in the iris.csv file from local drive 
 # reason for \\ in file name -  https://stackoverflow.com/questions/28328052/why-do-i-have-to-use-double-backslashes-for-file-paths-in-code
-
 print("\n\nWelcome to the Fisher's Iris data set analysis program")
-time.sleep(2)
-print("\nAuthor: Shane Keenan")
-time.sleep(2)
+#time.sleep(1)
+print("Author: Shane Keenan")
+#time.sleep(1)
 print("Project for semester 1, Programming and Scripting module, HDip in Computing in Data Analytics, Lecturer: Andrew Beatty")
-time.sleep(2)
+#time.sleep(2)
 print("\nThe aim of this project is to explore the capabilites of python to manipulate, analyse, display and plot data\n")
-time.sleep(2)
+#time.sleep(2)
 #read in the csv file from local drive 
 ''' dowwload file and change this path '''
 data = pd.read_csv("C:\\Users\\shane\\Desktop\\pands\\pands-project\\iris.csv")
 
 # tidy up the data - rename the columns with formated titles
-newcols={"sepallength":"Sepal Length [cm]","sepalwidth":"Sepal Width [cm]","petallength":"Petal Length [cm]","petalwidth":"Petal Width [cm]","class":"Species"}
-data.rename(columns=newcols,inplace=True)
+
+#newcols={"sepallength":"Sepal Length [cm]","sepalwidth":"Sepal Width [cm]","petallength":"Petal Length [cm]","petalwidth":"Petal Width [cm]","class":"Species"}
+#data.rename(columns=newcols,inplace=True)
+# create a list with the colum titles for use in plots 
+cols = ['Sepal Length [cm]', 'Sepal Width [cm]', 'Petal Length [cm]', 'Petal Width [cm]', 'Species']
+# rename columns numerically so easier to work with. 
+data = data.rename(columns = {cols[0]:0, cols[1]:1, cols[2]:2, cols[3]:3})
+
 
 #display details about the Iris data .shape output a tuple with the number of (rows, columns) 
 #print(f'\n\n{type(data.shape)}')
-col0 = newcols["sepallength"]
+#col0 = newcols["sepallength"]
 
 # define the main menu function 
 def mainMenu():
@@ -94,15 +99,36 @@ def mainMenu():
 def description():
     print("\n\nData set description")
     print('The Iris data set is a multivariate data set collated by British statistician and biologist Ronald Fisher. It was first published in his 1936 paper "The use of multiple measurements in taxonomic problems as an example of linear discriminant analysis." ')
-    print('The data set consists of 50 samples from each of three species of Iris (Iris setosa, Iris virginica and Iris versicolor')
+    print(f'The data set consists of 50 samples from each of three species of Iris (Iris setosa, Iris virginica and Iris versicolor) giving a total of {(data.shape[0])} rows of data.')
+    print(f'There are {(data.shape[1])} columns containing measurements of the various flower characteractics, {cols[0]},{cols[1]}, {cols[2]},{cols[3]} and {cols[4]}.')
+    print('The 3 species of Iris are shown in the figure')
+    print('Note: Sepal is any of the outer parts of a flower that enclose and protect the unopened flower bud')
     
-    print(f"\nThe columns are labels {col0}")
-    print(f'\n\nThe Iris dataset contains {(data.shape[0])} rows and {(data.shape[1])} columns')
+    image1 = Image.open("C:\\Users\\shane\\Desktop\\pands\\pands-project\\Iris_setosa.jpg")
+    image2 = Image.open("C:\\Users\\shane\\Desktop\\pands\\pands-project\\Iris_versicolor.jpg")
+    image3 = Image.open("C:\\Users\\shane\\Desktop\\pands\\pands-project\\Iris_virginica.jpg")
+    fig, (ax1, ax2, ax3) = plt.subplots(1, 3)
+    ax1.imshow(image1)
+    ax2.imshow(image2)
+    ax3.imshow(image3)  
+    ax1.axis('off')
+    ax2.axis('off')
+    ax3.axis('off')
+    ax1.set_title("Iris Setosa")
+    ax2.set_title("Iris Versicolor")
+    ax3.set_title("Iris Virginica")
+    ax1.text(0, 1500, 'Source: https://en.wikipedia.org/wiki/Iris_flower_data_set', color='black', fontsize=12, ha='left', va='top', alpha=0.5)
+    plt.show()
+    #print(f"Image format: {img.format}")
+    #print(f"Image size: {img.size}")
+    
+
 def display():
     print("\nRaw data display")
     print("Random sample of 10 rows\n")
     print(data.sample(10),end = "\n\n")
-    #print(data.head())
+    #print(data.head())s
+
 
 
 
