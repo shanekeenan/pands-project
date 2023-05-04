@@ -55,7 +55,10 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import time # for delays 
 from PIL import Image # to display jpg files 
+import os 
 
+# to clear terminal screen; https://www.scaler.com/topics/how-to-clear-screen-in-python/
+os.system('cls')
 # read in the iris.csv file from local drive 
 # reason for \\ in file name -  https://stackoverflow.com/questions/28328052/why-do-i-have-to-use-double-backslashes-for-file-paths-in-code
 print("\n\nWelcome to the Fisher's Iris data set analysis program")
@@ -66,8 +69,9 @@ print("Project for semester 1, Programming and Scripting module, HDip in Computi
 #time.sleep(2)
 print("\nThe aim of this project is to explore the capabilites of python to manipulate, analyse, display and plot data\n")
 #time.sleep(2)
+
 #read in the csv file from local drive 
-''' dowwload file and change this path '''
+''' download iris.csv data file and change this path '''
 data = pd.read_csv("C:\\Users\\shane\\Desktop\\pands\\pands-project\\iris.csv")
 
 # tidy up the data - rename the columns with formated titles
@@ -86,6 +90,7 @@ data = data.rename(columns = {cols[0]:0, cols[1]:1, cols[2]:2, cols[3]:3})
 
 # define the main menu function 
 def mainMenu():
+    print("MAIN MENU\n")
     print("What would you like to do with the Iris data set?")
     print("Please chose from the following options:")
     print("\t(s) See description")
@@ -97,13 +102,14 @@ def mainMenu():
     return choice
 
 def description():
+    os.system('cls')
     print("\n\nData set description")
     print('The Iris data set is a multivariate data set collated by British statistician and biologist Ronald Fisher. It was first published in his 1936 paper "The use of multiple measurements in taxonomic problems as an example of linear discriminant analysis." ')
     print(f'The data set consists of 50 samples from each of three species of Iris (Iris setosa, Iris virginica and Iris versicolor) giving a total of {(data.shape[0])} rows of data.')
     print(f'There are {(data.shape[1])} columns containing measurements of the various flower characteractics, {cols[0]},{cols[1]}, {cols[2]},{cols[3]} and {cols[4]}.')
     print('The 3 species of Iris are shown in the figure')
     print('Note: Sepal is any of the outer parts of a flower that enclose and protect the unopened flower bud')
-    
+    print('\n\nPlease close figure to return to the main menu\n')
     image1 = Image.open("C:\\Users\\shane\\Desktop\\pands\\pands-project\\Iris_setosa.jpg")
     image2 = Image.open("C:\\Users\\shane\\Desktop\\pands\\pands-project\\Iris_versicolor.jpg")
     image3 = Image.open("C:\\Users\\shane\\Desktop\\pands\\pands-project\\Iris_virginica.jpg")
@@ -121,12 +127,20 @@ def description():
     plt.show()
     #print(f"Image format: {img.format}")
     #print(f"Image size: {img.size}")
+    os.system('cls')
     
 
 def display():
+    os.system('cls')
     print("\nRaw data display")
     print("Random sample of 10 rows\n")
     print(data.sample(10),end = "\n\n")
+    
+
+    input("\n\nPress Enter to return to main menu\n\n")
+    os.system('cls')
+    # keyboard pause: https://stackoverflow.com/questions/50871649/pause-python-script-wait-for-key-press
+    
     #print(data.head())s
 
 
@@ -134,8 +148,15 @@ def display():
 
 def analysis():
     print("data analysis")
+
+
+
+
 def plot():
     print("data plot")
+
+
+
 
 choice = mainMenu()
 while choice != "q":
