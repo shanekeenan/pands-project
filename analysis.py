@@ -260,6 +260,24 @@ def submenu_plot():
 
 def plot():
     os.system('cls')
+    print('Scatter plotting\nPlease select what two attirbutes you would like to plot')
+    print('Enter:\n\t0: Sepal length\n\t1:Sepal width\n\t2:Petal length\n\t3:Petal width')
+    x = int(input("please enter x-axis variable (0-3):"))
+    y = int(input("please enter y-axis variable (0-3):"))
+    colors = {'Iris-setosa':'blue', 'Iris-virginica':'green', 'Iris-versicolor':'orange'}
+    #plt.scatter(data[0],data[2], c=data['Species'].map(colors), label=['Iris-setosa', 'Iris-virginica', 'Iris-versicolor'], edgecolors='grey')
+
+    for species in set(data['Species']):
+        plt.scatter(data.loc[data['Species'] == species, {x}], data.loc[data['Species'] == species, {2}], color=colors[species], label=species, edgecolors='grey')
+    
+    plt.xlabel(cols[{x}])
+    plt.ylabel(cols[{y}])
+    plt.title('Iris data scatter plot')
+    plt.xlim([4, 8])
+    plt.ylim([0, 8])
+    plt.legend()
+    plt.show() 
+    
     choice1 = submenu_display()
     while choice1 != "q":
         if choice1 == "r":
