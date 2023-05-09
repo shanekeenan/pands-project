@@ -79,7 +79,7 @@ data = pd.read_csv("C:\\Users\\shane\\Desktop\\pands\\pands-project\\iris.csv")
 newcols={"sepallength":"Sepal Length [cm]","sepalwidth":"Sepal Width [cm]","petallength":"Petal Length [cm]","petalwidth":"Petal Width [cm]","class":"Species"}
 # rename columns
 data = data.rename(columns=newcols)
-
+cols = ['Sepal Length [cm]', 'Sepal Width [cm]', 'Petal Length [cm]', 'Petal Width [cm]']
 
 
 
@@ -175,8 +175,6 @@ def display():
             print ("invalid choice")
             os.system('cls')
         choice1 = submenu_display()
-    
-
     input("\n\nPress Enter to return to main menu\n\n")
     os.system('cls')
     # keyboard pause: https://stackoverflow.com/questions/50871649/pause-python-script-wait-for-key-press
@@ -249,69 +247,68 @@ def analysis():
     os.system('cls')
 
 def submenu_plot():
-    print("Plotting sub-menu\n")
-    print("What type of plot Iris data set?")
+    print("Scatter Plot sub-menu\n")
     print("Please chose from the following options:")
-    print("\t(h) Histogram")
-    print("\t(s) Scatter plot")
+    print("\t(s) Select two variables to plot ")
+    print("\t(a) Plot all attributes")
     print("\t(q) return to main menu ")
-    subchoice = input("please select (s/d/a/p/q):")
+    subchoice = input("please select (s/a/q):")
     return subchoice
 
 def plot():
     os.system('cls')
-    print('Scatter plotting\nPlease select what two attirbutes you would like to plot')
-    print('Enter:\n\t0: Sepal length\n\t1:Sepal width\n\t2:Petal length\n\t3:Petal width')
-    x = int(input("please enter x-axis variable (0-3):"))
-    y = int(input("please enter y-axis variable (0-3):"))
-    colors = {'Iris-setosa':'blue', 'Iris-virginica':'green', 'Iris-versicolor':'orange'}
-    #plt.scatter(data[0],data[2], c=data['Species'].map(colors), label=['Iris-setosa', 'Iris-virginica', 'Iris-versicolor'], edgecolors='grey')
-
-    for species in set(data['Species']):
-        plt.scatter(data.loc[data['Species'] == species, {x}], data.loc[data['Species'] == species, {2}], color=colors[species], label=species, edgecolors='grey')
     
-    plt.xlabel(cols[{x}])
-    plt.ylabel(cols[{y}])
-    plt.title('Iris data scatter plot')
-    plt.xlim([4, 8])
-    plt.ylim([0, 8])
-    plt.legend()
-    plt.show() 
-    
-    choice1 = submenu_display()
+    choice1 = submenu_plot()
     while choice1 != "q":
-        if choice1 == "r":
-            print("\nRaw data display")
-            print("Random sample of 10 rows\n")
-            print(data.sample(10),end = "\n\n")
-            input("\n\nPress Enter to return to display sub-menu\n\n")
+        if choice1 == "s":
             os.system('cls')
-        elif choice1 == "t":
-            print("\nRaw data display")
-            print("Top 10 rows\n")
-            print(data.head(10),end = "\n\n")
-            input("\n\nPress Enter to return to display sub-menu\n\n")
+            data.rename(columns = {cols[0]:0, cols[1]:1, cols[2]:2, cols[3]:3}, inplace= True)
+            print('Scatter plotting\nPlease select what two attirbutes you would like to plot')
+            print('Enter:\n\t0:Sepal length\n\t1:Sepal width\n\t2:Petal length\n\t3:Petal width')
+            x = int(input("please enter x-axis variable (0-3):"))
+            y = int(input("please enter y-axis variable (0-3):"))
+            colors = {'Iris-setosa':'blue', 'Iris-virginica':'green', 'Iris-versicolor':'orange'}
+            #plt.scatter(data[0],data[2], c=data['Species'].map(colors), label=['Iris-setosa', 'Iris-virginica', 'Iris-versicolor'], edgecolors='grey')
+
+            for species in set(data['Species']):
+                plt.scatter(data.loc[data['Species'] == species, x], data.loc[data['Species'] == species, y], color=colors[species], label=species, edgecolors='grey')
+            plt.xlabel(cols[x])
+            plt.ylabel(cols[y])
+            plt.title('Iris data scatter plot')
+            #plt.xlim([4, 8])
+            #plt.ylim([0, 8])
+            plt.legend()
+            plt.show() 
             os.system('cls')
-        elif choice1 == "f":
-            print("\nRaw data display")
-            print("Full data set 150 rows\n")
-            pd.set_option('display.max_rows', 150)
-            print(data,end = "\n\n")
+        elif choice1 == "a":
+            newcols={0:"Sepal Length [cm]",1:"Sepal Width [cm]",2:"Petal Length [cm]",3:"Petal Width [cm]","class":"Species"}
+            data.rename(columns=newcols,inplace=True)
+            plt.figure()
+            g = sns.pairplot(data,hue="Species")
+                       
             input("\n\nPress Enter to return to display sub-menu\n\n")
             os.system('cls')
         else:
             print ("invalid choice")
             os.system('cls')
-        choice1 = submenu_display()
+        choice1 = submenu_plot()
+    input("\n\nPress Enter to return to main menu\n\n")
+    os.system('cls')    
+    
+    
+    
+    
+    
+    
     
 
-    input("\n\nPress Enter to return to main menu\n\n")
-    os.system('cls')
     
     
-    
-    
-    print("data plot")
+
+
+
+
+
 
 choice = mainMenu()
 while choice != "q":
@@ -321,74 +318,10 @@ while choice != "q":
         display()
     elif choice == "a":
         analysis()
-    elif choice == "a":
+    elif choice == "p":
         plot()
     else:
         print ("invalid choice")
     choice = mainMenu()
 
 
-
-#what type of data is read in
-print(type(data))
-
-# displays the top rows of the dataset -default value of 5 rows - 
-print(data.head(10))
-print(type(data.head(10)))
-
-# displays a random sample of rows of the dataset -default value of 1 rows - 
-print(data.sample(10))
-print(type(data.sample(10)))
-
-# displays the header / column data (if there) - this dataset does have a index in the .csv file.  
-print(f'\n\n{data.columns}')
-print(type(data.columns))
-
-# display the shape of the data set - (rows, columns)
-print(f'\n\n{(data.shape)}')
-print(f'\n\n{type(data.shape)}')
-
-# to select a certain column of the data and assign it to a variable 
-select_data=data[["sepallength","sepalwidth"]]
-
-print(select_data.head(10))
-print(type(select_data.head(10)))
-
-# indexing to look at specific rows in the data. 
-
-# to select a row by number index - use iloc[]
-print(data.iloc[5])
-
-#to select rows by the attribuete in a certain column index - use loc[]
-print(data.loc[data["class"] == "Iris-setosa"])
-
-# and then select a certain column within the subset 
-setosa= data.loc[data["class"] == "Iris-setosa"]
-select_data=setosa[["sepallength"]]
-print(select_data)
-
-# to count number of times a particular class (or any value) has occurred - use value_counts 
-print(data["sepallength"].value_counts())
-
-# calculate some statistics of the data - Sepallength
-sum_data = data["sepallength"].sum()
-mean_data = data["sepallength"].mean()
-median_data = data["sepallength"].median()
-  
-print("Sum: {:.2f} \nMean: {:.2f} \nMedian: {:.2f}".format(sum_data,mean_data,median_data))
-
-# determine the minimum and maximum from a column 
-min_data=data["sepallength"].min()
-max_data=data["sepallength"].max()
-  
-print("Minimum:",min_data, "\nMaximum:", max_data)
-
-#check whether there is missing data in the file 
-data.isnull()
-
-'''
-print(data.head(10).style.highlight_max(color='lightgreen', axis=0))
-print(data.head(10).style.highlight_max(color='lightgreen', axis=1))
-print(data.head(10).style.highlight_max(color='lightgreen', axis=None))
-'''
-sns.pairplot(data,hue="Species")
