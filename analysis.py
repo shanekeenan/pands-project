@@ -99,8 +99,8 @@ def mainMenu():
     print("Please chose from the following options:")
     print("\t(s) See description")
     print("\t(d) Display raw data")
-    print("\t(a) Statistical analysis ")
-    print("\t(p) Plot data")
+    print("\t(a) Statistical plotting and analysis  ")
+    print("\t(p) Scatter plots")
     print("\t(q) Quit program")
     choice = input("please select (s/d/a/p/q):")
     return choice
@@ -202,11 +202,9 @@ def analysis():
     B = [data[1][data.Species == 'Iris-setosa'], data[1][data.Species == 'Iris-virginica'], data[1][data.Species == 'Iris-versicolor']]
     C = [data[2][data.Species == 'Iris-setosa'], data[2][data.Species == 'Iris-virginica'], data[2][data.Species == 'Iris-versicolor']]
     D = [data[3][data.Species == 'Iris-setosa'], data[3][data.Species == 'Iris-virginica'], data[3][data.Species == 'Iris-versicolor']]
-
     ax[0, 0].boxplot(A, labels=('Iris-setosa', 'Iris-virginica', 'Iris-versicolor'),vert=False,widths = 0.7, patch_artist=True, showmeans=True, meanprops={'linewidth': 2, 'color': 'red'},medianprops={'linewidth': 2, 'color': 'purple'})
     ax[0, 0].set_title('Sepal length distribution for Iris species')
     ax[0, 0].set_xlabel(cols[0])
-    
     ax[0, 1].boxplot(B, labels=('Iris-setosa', 'Iris-virginica', 'Iris-versicolor'), vert=False,widths = 0.7, patch_artist=True, showmeans=True, meanprops={'linewidth': 2, 'color': 'red'},medianprops={'linewidth': 2, 'color': 'purple'})
     ax[0, 1].set_xlabel(cols[1])
     ax[0, 1].set_title('Sepal width distribution for Iris species')
@@ -216,7 +214,6 @@ def analysis():
     ax[1, 1].boxplot(D, labels=('Iris-setosa', 'Iris-virginica', 'Iris-versicolor'), vert=False,widths = 0.7, patch_artist=True, showmeans=True, meanprops={'linewidth': 2, 'color': 'red'},medianprops={'linewidth': 2, 'color': 'purple'})
     ax[1, 1].set_xlabel(cols[3])
     ax[1, 1].set_title('Pedal width distribution for Iris species')
-
     plt.show()
     
     input("\n\nPress Enter to see a histogram plot of data\n\n")
@@ -227,40 +224,26 @@ def analysis():
     B = [data[1][data.Species == 'Iris-setosa'], data[1][data.Species == 'Iris-virginica'], data[1][data.Species == 'Iris-versicolor']]
     C = [data[2][data.Species == 'Iris-setosa'], data[2][data.Species == 'Iris-virginica'], data[2][data.Species == 'Iris-versicolor']]
     D = [data[3][data.Species == 'Iris-setosa'], data[3][data.Species == 'Iris-virginica'], data[3][data.Species == 'Iris-versicolor']]
-
     ax[0, 0].hist(A, bins = 15, density=True, label=('Iris-setosa', 'Iris-virginica', 'Iris-versicolor'), edgecolor='black')
     ax[0, 0].set_title('Sepal length distribution for Iris species')
     ax[0, 0].legend(loc='upper right')
     ax[0, 0].set_xlabel(cols[0])
     ax[0, 0].set_ylabel('Frequency')
-
     ax[0, 1].hist(B, bins = 15, label=('Iris-setosa', 'Iris-virginica', 'Iris-versicolor'), edgecolor='black',)
     ax[0, 1].set_title('Sepal width distribution for Iris species')
     ax[0, 1].legend(loc='upper right')
     ax[0, 1].set_xlabel(cols[1])
     ax[0, 1].set_ylabel('Frequency')
-
-
     ax[1, 0].hist(C, bins = 15, label=('Iris-setosa', 'Iris-virginica', 'Iris-versicolor'), edgecolor='black',)
     ax[1, 0].set_title('Pedal length distribution for Iris species')
     ax[1, 0].legend(loc='upper right')
     ax[1, 0].set_xlabel(cols[2])
     ax[1, 0].set_ylabel('Frequency')
-
     ax[1, 1].hist(D, bins = 15, label=('Iris-setosa', 'Iris-virginica', 'Iris-versicolor'), edgecolor='black',)
     ax[1, 1].set_title('Pedal width distribution for Iris species')
     ax[1, 1].legend(loc='upper right')
     ax[1, 1].set_xlabel(cols[3])
     ax[1, 1].set_ylabel('Frequency')
-        
-
-
-    
-    #vert=False, showmeans=True, meanline=True,
-     #      labels=('x', 'y', 'z'), patch_artist=True,
-      #     medianprops={'linewidth': 2, 'color': 'purple'},
-       #    meanprops={'linewidth': 2, 'color': 'red'})
-    
     plt.show()
     input("\n\nPress Enter to return to main menu\n\n")
     os.system('cls')
@@ -277,6 +260,39 @@ def submenu_plot():
 
 def plot():
     os.system('cls')
+    choice1 = submenu_display()
+    while choice1 != "q":
+        if choice1 == "r":
+            print("\nRaw data display")
+            print("Random sample of 10 rows\n")
+            print(data.sample(10),end = "\n\n")
+            input("\n\nPress Enter to return to display sub-menu\n\n")
+            os.system('cls')
+        elif choice1 == "t":
+            print("\nRaw data display")
+            print("Top 10 rows\n")
+            print(data.head(10),end = "\n\n")
+            input("\n\nPress Enter to return to display sub-menu\n\n")
+            os.system('cls')
+        elif choice1 == "f":
+            print("\nRaw data display")
+            print("Full data set 150 rows\n")
+            pd.set_option('display.max_rows', 150)
+            print(data,end = "\n\n")
+            input("\n\nPress Enter to return to display sub-menu\n\n")
+            os.system('cls')
+        else:
+            print ("invalid choice")
+            os.system('cls')
+        choice1 = submenu_display()
+    
+
+    input("\n\nPress Enter to return to main menu\n\n")
+    os.system('cls')
+    
+    
+    
+    
     print("data plot")
 
 choice = mainMenu()
