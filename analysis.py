@@ -37,7 +37,7 @@ but rather to present your code and its output to them.
 # Resources used: 
 # Iris images and database information : https://en.wikipedia.org/wiki/Iris_flower_data_set
 # 
-#
+#subplot formatting: https://stackoverflow.com/questions/25862026/turn-off-axes-in-subplots
 # https://www.geeksforgeeks.org/python-basics-of-pandas-using-iris-dataset/  
 # Iris dataset as .csv and headers from https://datahub.io/machine-learning/iris#resource-iris
 
@@ -63,11 +63,11 @@ os.system('cls')
 # reason for \\ in file name -  https://stackoverflow.com/questions/28328052/why-do-i-have-to-use-double-backslashes-for-file-paths-in-code
 print("\n\nWelcome to the Fisher's Iris data set analysis program")
 #time.sleep(1)
-print("Author: Shane Keenan")
+print("Project for Programming and Scripting module, HDip in Computing in Data Analytics at ATU Galway with Lecturer, Andrew Beatty")
 #time.sleep(1)
-print("Project for semester 1, Programming and Scripting module, HDip in Computing in Data Analytics, Lecturer: Andrew Beatty")
+print("Author: Shane Keenan\nDate: 12 May 2023")
 #time.sleep(2)
-print("\nThe aim of this project is to explore the capabilites of python to manipulate, analyse, display and plot data\n")
+print("\nThe aim of this project is to explore the capabilites of python to manipulate, analyse, display and plot data.\n")
 #time.sleep(2)
 
 #read in the csv file from local drive 
@@ -76,12 +76,11 @@ data = pd.read_csv("C:\\Users\\shane\\Desktop\\pands\\pands-project\\iris.csv")
 
 # tidy up the data - rename the columns with formated titles
 
-#newcols={"sepallength":"Sepal Length [cm]","sepalwidth":"Sepal Width [cm]","petallength":"Petal Length [cm]","petalwidth":"Petal Width [cm]","class":"Species"}
-#data.rename(columns=newcols,inplace=True)
-# create a list with the colum titles for use in plots 
-cols = ['Sepal Length [cm]', 'Sepal Width [cm]', 'Petal Length [cm]', 'Petal Width [cm]', 'Species']
-# rename columns numerically so easier to work with. 
-data = data.rename(columns = {cols[0]:0, cols[1]:1, cols[2]:2, cols[3]:3})
+newcols={"sepallength":"Sepal Length [cm]","sepalwidth":"Sepal Width [cm]","petallength":"Petal Length [cm]","petalwidth":"Petal Width [cm]","class":"Species"}
+# rename columns
+data = data.rename(columns=newcols)
+
+
 
 
 #display details about the Iris data .shape output a tuple with the number of (rows, columns) 
@@ -90,6 +89,11 @@ data = data.rename(columns = {cols[0]:0, cols[1]:1, cols[2]:2, cols[3]:3})
 
 # define the main menu function 
 def mainMenu():
+    # tidy up the data - rename the columns with formated titles
+    newcols={"sepallength":"Sepal Length [cm]","sepalwidth":"Sepal Width [cm]","petallength":"Petal Length [cm]","petalwidth":"Petal Width [cm]","class":"Species"}
+    # rename columns
+    data.rename(columns=newcols, inplace=True)
+
     print("MAIN MENU\n")
     print("What would you like to do with the Iris data set?")
     print("Please chose from the following options:")
@@ -104,12 +108,11 @@ def mainMenu():
 def description():
     os.system('cls')
     print("\n\nData set description")
-    print('The Iris data set is a multivariate data set collated by British statistician and biologist Ronald Fisher. It was first published in his 1936 paper "The use of multiple measurements in taxonomic problems as an example of linear discriminant analysis." ')
-    print(f'The data set consists of 50 samples from each of three species of Iris (Iris setosa, Iris virginica and Iris versicolor) giving a total of {(data.shape[0])} rows of data.')
-    print(f'There are {(data.shape[1])} columns containing measurements of the various flower characteractics, {cols[0]},{cols[1]}, {cols[2]},{cols[3]} and {cols[4]}.')
-    print('The 3 species of Iris are shown in the figure')
-    print('Note: Sepal is any of the outer parts of a flower that enclose and protect the unopened flower bud')
-    print('\n\nPlease close figure to return to the main menu\n')
+    print('''The Iris data set is a multivariate data set collated by British statistician and biologist Ronald Fisher. It was first published in his 1936 paper "The use of multiple measurements in taxonomic problems as an example of linear discriminant analysis. 
+The data set consists of 50 samples from each of three species of Iris (Iris setosa, Iris virginica and Iris versicolor) giving a total of 150 rows of data.
+There are 5 columns of data, 4 columns containing measurements of the various flower characteractics, Sepal Length [cm], Sepal Width [cm], Petal Length [cm] and Petal Width [cm]. The 5th column specifies the species of Iris. The 3 species of Iris are shown in figure 1 along with labels of the pedal and sepal parts of the Iris.
+Note: the Sepal is any of the outer parts of a flower that enclose and protect the unopened flower bud and for these Iris are coloured similarly to the pedal.
+    \n\nPlease close figure to return to the main menu\n''')
     image1 = Image.open("C:\\Users\\shane\\Desktop\\pands\\pands-project\\Iris_setosa.jpg")
     image2 = Image.open("C:\\Users\\shane\\Desktop\\pands\\pands-project\\Iris_versicolor.jpg")
     image3 = Image.open("C:\\Users\\shane\\Desktop\\pands\\pands-project\\Iris_virginica.jpg")
@@ -123,40 +126,158 @@ def description():
     ax1.set_title("Iris Setosa")
     ax2.set_title("Iris Versicolor")
     ax3.set_title("Iris Virginica")
+    ax2.text(500, 500, 'Sepal', color='white', fontsize=14, ha='left', va='top', alpha=1)
+    ax2.text(1400, 1200, 'Pedal', color='white', fontsize=14, ha='left', va='top', alpha=1)
     ax1.text(0, 1500, 'Source: https://en.wikipedia.org/wiki/Iris_flower_data_set', color='black', fontsize=12, ha='left', va='top', alpha=0.5)
+    ax1.text(0, 1400, 'Figure 1. Pictures of the 3 Iris species include in the Iris data set (Iris Setosa, Iris Versicolor and Iris Virginica). Labeling indicate the parts of the Iris flower measured in the data set', color='black', fontsize=12, ha='left', va='top', alpha=0.5)
+   
+    #plt.arrow(2,5,4,2,width=.3, edgecolor='green',facecolor='red',linestyle='--',linewidth=3)
     plt.show()
     #print(f"Image format: {img.format}")
     #print(f"Image size: {img.size}")
     os.system('cls')
     
+def submenu_display():
+    print("Display sub-menu\n")
+    print("What part of raw Iris data set would you like to see?")
+    print("Please chose from the following options:")
+    print("\t(r) Ramdom sample of 10 rows")
+    print("\t(t) Top 10 rows")
+    print("\t(f) Full Iris data set")
+    print("\t(q) Return to main menu ")
+    subchoice = input("please select (r/t/f/q):")
+    return subchoice
 
 def display():
     os.system('cls')
-    print("\nRaw data display")
-    print("Random sample of 10 rows\n")
-    print(data.sample(10),end = "\n\n")
+    choice1 = submenu_display()
+    while choice1 != "q":
+        if choice1 == "r":
+            print("\nRaw data display")
+            print("Random sample of 10 rows\n")
+            print(data.sample(10),end = "\n\n")
+            input("\n\nPress Enter to return to display sub-menu\n\n")
+            os.system('cls')
+        elif choice1 == "t":
+            print("\nRaw data display")
+            print("Top 10 rows\n")
+            print(data.head(10),end = "\n\n")
+            input("\n\nPress Enter to return to display sub-menu\n\n")
+            os.system('cls')
+        elif choice1 == "f":
+            print("\nRaw data display")
+            print("Full data set 150 rows\n")
+            pd.set_option('display.max_rows', 150)
+            print(data,end = "\n\n")
+            input("\n\nPress Enter to return to display sub-menu\n\n")
+            os.system('cls')
+        else:
+            print ("invalid choice")
+            os.system('cls')
+        choice1 = submenu_display()
     
 
     input("\n\nPress Enter to return to main menu\n\n")
     os.system('cls')
     # keyboard pause: https://stackoverflow.com/questions/50871649/pause-python-script-wait-for-key-press
     
-    #print(data.head())s
-
-
-
+    #print(data.head())
 
 def analysis():
-    print("data analysis")
+    os.system('cls')
+    print("Statistical analysis\nThe table below shows some statistics for each of the four Iris attributes measured, these include:\nCount: the number of items in each column\nMean: the mean of each column\nstd: the standard deviation\nmin and max: the minimum and maximum values\n25%, 50%, and 75%: the percentiles\n")
+    print(data.describe())
+    
+    input("\n\nPress Enter to see box plot of data\n\n")
+    # create a list with the colum titles for use in plots 
+    cols = ['Sepal Length [cm]', 'Sepal Width [cm]', 'Petal Length [cm]', 'Petal Width [cm]', 'Species']
+    # rename columns numerically so easier to work with. 
+    data.rename(columns = {cols[0]:0, cols[1]:1, cols[2]:2, cols[3]:3}, inplace=True)
+    print(f'Box plot\nThis statistical data can be visualised using box plots. Here we see the data plotted vertically for each species against the four attributes. The plot shows the range, interquartile range, median, mode, outliers, and all quartiles of the data set.') 
+    print('THe red line indicates the median of the data, the green triangle the mean value, open circles indcicate the outlier points')
+    # box plots: https://realpython.com/python-statistics/
+    
+    fig, ax = plt.subplots(2, 2, figsize=(15, 10))
+    A = [data[0][data.Species == 'Iris-setosa'], data[0][data.Species == 'Iris-virginica'], data[0][data.Species == 'Iris-versicolor']]
+    B = [data[1][data.Species == 'Iris-setosa'], data[1][data.Species == 'Iris-virginica'], data[1][data.Species == 'Iris-versicolor']]
+    C = [data[2][data.Species == 'Iris-setosa'], data[2][data.Species == 'Iris-virginica'], data[2][data.Species == 'Iris-versicolor']]
+    D = [data[3][data.Species == 'Iris-setosa'], data[3][data.Species == 'Iris-virginica'], data[3][data.Species == 'Iris-versicolor']]
+
+    ax[0, 0].boxplot(A, labels=('Iris-setosa', 'Iris-virginica', 'Iris-versicolor'),vert=False,widths = 0.7, patch_artist=True, showmeans=True, meanprops={'linewidth': 2, 'color': 'red'},medianprops={'linewidth': 2, 'color': 'purple'})
+    ax[0, 0].set_title('Sepal length distribution for Iris species')
+    ax[0, 0].set_xlabel(cols[0])
+    
+    ax[0, 1].boxplot(B, labels=('Iris-setosa', 'Iris-virginica', 'Iris-versicolor'), vert=False,widths = 0.7, patch_artist=True, showmeans=True, meanprops={'linewidth': 2, 'color': 'red'},medianprops={'linewidth': 2, 'color': 'purple'})
+    ax[0, 1].set_xlabel(cols[1])
+    ax[0, 1].set_title('Sepal width distribution for Iris species')
+    ax[1, 0].boxplot(C,labels=('Iris-setosa', 'Iris-virginica', 'Iris-versicolor'), vert=False,widths = 0.7, patch_artist=True, showmeans=True, meanprops={'linewidth': 2, 'color': 'red'},medianprops={'linewidth': 2, 'color': 'purple'})
+    ax[1, 0].set_xlabel(cols[2])
+    ax[1, 0].set_title('Pedal length distribution for Iris species')
+    ax[1, 1].boxplot(D, labels=('Iris-setosa', 'Iris-virginica', 'Iris-versicolor'), vert=False,widths = 0.7, patch_artist=True, showmeans=True, meanprops={'linewidth': 2, 'color': 'red'},medianprops={'linewidth': 2, 'color': 'purple'})
+    ax[1, 1].set_xlabel(cols[3])
+    ax[1, 1].set_title('Pedal width distribution for Iris species')
+
+    plt.show()
+    
+    input("\n\nPress Enter to see a histogram plot of data\n\n")
+    print(f'Histogram\nPlotting the data in a histogram allows us to easily see the frequency of certain values in the data. Here we again have broken the data into the four attributes. The three species of Iris are displayed in different colours as indicated in the legend.')
+    # histogram - same format as box plot 
+    fig, ax = plt.subplots(2, 2, figsize=(16, 10))
+    A = [data[0][data.Species == 'Iris-setosa'], data[0][data.Species == 'Iris-virginica'], data[0][data.Species == 'Iris-versicolor']]
+    B = [data[1][data.Species == 'Iris-setosa'], data[1][data.Species == 'Iris-virginica'], data[1][data.Species == 'Iris-versicolor']]
+    C = [data[2][data.Species == 'Iris-setosa'], data[2][data.Species == 'Iris-virginica'], data[2][data.Species == 'Iris-versicolor']]
+    D = [data[3][data.Species == 'Iris-setosa'], data[3][data.Species == 'Iris-virginica'], data[3][data.Species == 'Iris-versicolor']]
+
+    ax[0, 0].hist(A, bins = 15, density=True, label=('Iris-setosa', 'Iris-virginica', 'Iris-versicolor'), edgecolor='black')
+    ax[0, 0].set_title('Sepal length distribution for Iris species')
+    ax[0, 0].legend(loc='upper right')
+    ax[0, 0].set_xlabel(cols[0])
+    ax[0, 0].set_ylabel('Frequency')
+
+    ax[0, 1].hist(B, bins = 15, label=('Iris-setosa', 'Iris-virginica', 'Iris-versicolor'), edgecolor='black',)
+    ax[0, 1].set_title('Sepal width distribution for Iris species')
+    ax[0, 1].legend(loc='upper right')
+    ax[0, 1].set_xlabel(cols[1])
+    ax[0, 1].set_ylabel('Frequency')
 
 
+    ax[1, 0].hist(C, bins = 15, label=('Iris-setosa', 'Iris-virginica', 'Iris-versicolor'), edgecolor='black',)
+    ax[1, 0].set_title('Pedal length distribution for Iris species')
+    ax[1, 0].legend(loc='upper right')
+    ax[1, 0].set_xlabel(cols[2])
+    ax[1, 0].set_ylabel('Frequency')
 
+    ax[1, 1].hist(D, bins = 15, label=('Iris-setosa', 'Iris-virginica', 'Iris-versicolor'), edgecolor='black',)
+    ax[1, 1].set_title('Pedal width distribution for Iris species')
+    ax[1, 1].legend(loc='upper right')
+    ax[1, 1].set_xlabel(cols[3])
+    ax[1, 1].set_ylabel('Frequency')
+        
+
+
+    
+    #vert=False, showmeans=True, meanline=True,
+     #      labels=('x', 'y', 'z'), patch_artist=True,
+      #     medianprops={'linewidth': 2, 'color': 'purple'},
+       #    meanprops={'linewidth': 2, 'color': 'red'})
+    
+    plt.show()
+    input("\n\nPress Enter to return to main menu\n\n")
+    os.system('cls')
+
+def submenu_plot():
+    print("Plotting sub-menu\n")
+    print("What type of plot Iris data set?")
+    print("Please chose from the following options:")
+    print("\t(h) Histogram")
+    print("\t(s) Scatter plot")
+    print("\t(q) return to main menu ")
+    subchoice = input("please select (s/d/a/p/q):")
+    return subchoice
 
 def plot():
+    os.system('cls')
     print("data plot")
-
-
-
 
 choice = mainMenu()
 while choice != "q":
@@ -171,6 +292,8 @@ while choice != "q":
     else:
         print ("invalid choice")
     choice = mainMenu()
+
+
 
 #what type of data is read in
 print(type(data))
