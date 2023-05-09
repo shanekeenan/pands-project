@@ -1,54 +1,20 @@
 # analysis.py  
 # pands project   
 # Author: Shane Keenan
-# Status: ongoing 
-'''  Problem statement
-This project concerns the well-known Fisher’s Iris data set [3]. 
-You must research the data set and write documentation and code (in Python [1]) to investigate it.
-An online search for information on the data set will convince you that many people have investigated it previously. 
-
-You are expected to be able to break this project into several smaller tasks that are easier to solve,
-and to plug these together after they have been completed. 
-
-You might do that for this project as follows:
-
-1. Research the data set online and write a summary about it in your README. 
-2. Download the data set and add it to your repository. 
-3. Write a program called analysis.py that: 
-1. Outputs a summary of each variable to a single text file, 
-2. Saves a histogram of each variable to png files, and 
-3. Outputs a scatter plot of each pair of variables. 
-4. Performs any other analysis you think is appropriate
-
-
-You may produce a Jupyter notebook as well containing all your comment.
-This notebook should only contain text that you have written yourself, (it may contain referenced code from other sources). 
-I will harshly mark any text (not code) that I feel is not written directly by you. 
-I want to know what YOU think, not some third party. 
-
-It might help to suppose that your manager has asked you to investigate the data set, with a 
-view to explaining it to your colleagues. Imagine that you are to give a presentation on the 
-data set in a few weeks’ time, where you explain what investigating a data set entails and how 
-Python can be used to do it. 
-You have not been asked to create a deck of presentation slides, 
-but rather to present your code and its output to them. 
-
-'''
+# Status: complete
 # Resources used: 
 # Iris images and database information : https://en.wikipedia.org/wiki/Iris_flower_data_set
 # 
-#subplot formatting: https://stackoverflow.com/questions/25862026/turn-off-axes-in-subplots
+# subplot formatting: https://stackoverflow.com/questions/25862026/turn-off-axes-in-subplots
 # https://www.geeksforgeeks.org/python-basics-of-pandas-using-iris-dataset/  
 # Iris dataset as .csv and headers from https://datahub.io/machine-learning/iris#resource-iris
-
+# to clear terminal screen; https://www.scaler.com/topics/how-to-clear-screen-in-python/
 # pands is one of many open-source libraries available with python. It is useful for data manipulation and analysis.
-
+# reason for \\ in file name -  https://stackoverflow.com/questions/28328052/why-do-i-have-to-use-double-backslashes-for-file-paths-in-code
 # install pands on the system (done once in command window)
 # pip install pandas 
 
-
-
-#import pands and give it the identifier "pd" - use pd to call this library
+#import libraries with identifiers "pd"
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -57,35 +23,26 @@ import time # for delays
 from PIL import Image # to display jpg files 
 import os 
 
-# to clear terminal screen; https://www.scaler.com/topics/how-to-clear-screen-in-python/
 os.system('cls')
-# read in the iris.csv file from local drive 
-# reason for \\ in file name -  https://stackoverflow.com/questions/28328052/why-do-i-have-to-use-double-backslashes-for-file-paths-in-code
 print("\n\nWelcome to the Fisher's Iris data set analysis program")
-#time.sleep(1)
+time.sleep(1)
 print("Project for Programming and Scripting module, HDip in Computing in Data Analytics at ATU Galway with Lecturer, Andrew Beatty")
-#time.sleep(1)
+time.sleep(1)
 print("Author: Shane Keenan\nDate: 12 May 2023")
-#time.sleep(2)
+time.sleep(1)
 print("\nThe aim of this project is to explore the capabilites of python to manipulate, analyse, display and plot data.\n")
-#time.sleep(2)
+
 
 #read in the csv file from local drive 
 ''' download iris.csv data file and change this path '''
 data = pd.read_csv("C:\\Users\\shane\\Desktop\\pands\\pands-project\\iris.csv")
 
 # tidy up the data - rename the columns with formated titles
-
 newcols={"sepallength":"Sepal Length [cm]","sepalwidth":"Sepal Width [cm]","petallength":"Petal Length [cm]","petalwidth":"Petal Width [cm]","class":"Species"}
 # rename columns
 data = data.rename(columns=newcols)
+#list with column names for plotting
 cols = ['Sepal Length [cm]', 'Sepal Width [cm]', 'Petal Length [cm]', 'Petal Width [cm]']
-
-
-
-#display details about the Iris data .shape output a tuple with the number of (rows, columns) 
-#print(f'\n\n{type(data.shape)}')
-#col0 = newcols["sepallength"]
 
 # define the main menu function 
 def mainMenu():
@@ -243,6 +200,19 @@ def analysis():
     ax[1, 1].set_xlabel(cols[3])
     ax[1, 1].set_ylabel('Frequency')
     plt.show()
+
+    input("\n\nPress Enter to see a heatmap correlation plot of the Iris data set\n\n")
+    print(f'Heatmap \nHeatmaps are particularly useful for illustrating the covariance and correlation between attributes.')
+    print('From the map we can see - Petal width and petal length have high correlations\n-Petal length and sepal width have good correlations.\n-Petal Width and Sepal length have good correlations.')
+    print('Conversely, Sepal length and Sepal width are poorly correlated')
+
+    newcols={0:"Sepal Length [cm]",1:"Sepal Width [cm]",2:"Petal Length [cm]",3:"Petal Width [cm]","class":"Species"}
+    data.rename(columns=newcols,inplace=True)
+    sns.heatmap(data.corr(method='pearson'), annot = True)
+    plt.show()
+
+
+
     input("\n\nPress Enter to return to main menu\n\n")
     os.system('cls')
 
@@ -284,8 +254,8 @@ def plot():
             newcols={0:"Sepal Length [cm]",1:"Sepal Width [cm]",2:"Petal Length [cm]",3:"Petal Width [cm]","class":"Species"}
             data.rename(columns=newcols,inplace=True)
             plt.figure()
-            g = sns.pairplot(data,hue="Species")
-                       
+            sns.pairplot(data,hue="Species")
+            plt.show()          
             input("\n\nPress Enter to return to display sub-menu\n\n")
             os.system('cls')
         else:
@@ -294,21 +264,6 @@ def plot():
         choice1 = submenu_plot()
     input("\n\nPress Enter to return to main menu\n\n")
     os.system('cls')    
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
-
-
-
-
-
 
 choice = mainMenu()
 while choice != "q":
@@ -324,4 +279,21 @@ while choice != "q":
         print ("invalid choice")
     choice = mainMenu()
 
+print(''' ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⡀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣤⠀⠀⠀⢀⣴⣿⡶⠀⣾⣿⣿⡿⠟⠛⠁
+⠀⠀⠀⠀⠀⠀⣀⣀⣄⣀⠀⠀⠀⠀⣶⣶⣦⠀⠀⠀⠀⣼⣿⣿⡇⠀⣠⣿⣿⣿⠇⣸⣿⣿⣧⣤⠀⠀⠀
+⠀⠀⢀⣴⣾⣿⡿⠿⠿⠿⠇⠀⠀⣸⣿⣿⣿⡆⠀⠀⢰⣿⣿⣿⣷⣼⣿⣿⣿⡿⢀⣿⣿⡿⠟⠛⠁⠀⠀
+⠀⣴⣿⡿⠋⠁⠀⠀⠀⠀⠀⠀⢠⣿⣿⣹⣿⣿⣿⣿⣿⣿⡏⢻⣿⣿⢿⣿⣿⠃⣼⣿⣯⣤⣴⣶⣿⡤⠀
+⣼⣿⠏⠀⣀⣠⣤⣶⣾⣷⠄⣰⣿⣿⡿⠿⠻⣿⣯⣸⣿⡿⠀⠀⠀⠁⣾⣿⡏⢠⣿⣿⠿⠛⠋⠉⠀⠀⠀
+⣿⣿⠲⢿⣿⣿⣿⣿⡿⠋⢰⣿⣿⠋⠀⠀⠀⢻⣿⣿⣿⠇⠀⠀⠀⠀⠙⠛⠀⠀⠉⠁⠀⠀⠀⠀⠀⠀⠀
+⠹⢿⣷⣶⣿⣿⠿⠋⠀⠀⠈⠙⠃⠀⠀⠀⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠈⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣤⣴⣶⣦⣤⡀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡀⠀⠀⠀⠀⠀⠀⠀⣠⡇⢰⣶⣶⣾⡿⠷⣿⣿⣿⡟⠛⣉⣿⣿⣿⠆
+⠀⠀⠀⠀⠀⠀⢀⣤⣶⣿⣿⡎⣿⣿⣦⠀⠀⠀⢀⣤⣾⠟⢀⣿⣿⡟⣁⠀⠀⣸⣿⣿⣤⣾⣿⡿⠛⠁⠀
+⠀⠀⠀⠀⣠⣾⣿⡿⠛⠉⢿⣦⠘⣿⣿⡆⠀⢠⣾⣿⠋⠀⣼⣿⣿⣿⠿⠷⢠⣿⣿⣿⠿⢻⣿⣧⠀⠀⠀
+⠀⠀⠀⣴⣿⣿⠋⠀⠀⠀⢸⣿⣇⢹⣿⣷⣰⣿⣿⠃⠀⢠⣿⣿⢃⣀⣤⣤⣾⣿⡟⠀⠀⠀⢻⣿⣆⠀⠀
+⠀⠀⠀⣿⣿⡇⠀⠀⢀⣴⣿⣿⡟⠀⣿⣿⣿⣿⠃⠀⠀⣾⣿⣿⡿⠿⠛⢛⣿⡟⠀⠀⠀⠀⠀⠻⠿⠀⠀
+⠀⠀⠀⠹⣿⣿⣶⣾⣿⣿⣿⠟⠁⠀⠸⢿⣿⠇⠀⠀⠀⠛⠛⠁⠀⠀⠀⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠈⠙⠛⠛⠛⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀''')
 
+print('\n\nThanks for playing Andrew : )\n\n')
