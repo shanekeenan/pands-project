@@ -4,17 +4,17 @@
 # Status: complete
 # Resources used: 
 # Iris images and database information : https://en.wikipedia.org/wiki/Iris_flower_data_set
-# 
-# subplot formatting: https://stackoverflow.com/questions/25862026/turn-off-axes-in-subplots
+# # subplot formatting: https://stackoverflow.com/questions/25862026/turn-off-axes-in-subplots
 # https://www.geeksforgeeks.org/python-basics-of-pandas-using-iris-dataset/  
 # Iris dataset as .csv and headers from https://datahub.io/machine-learning/iris#resource-iris
 # to clear terminal screen; https://www.scaler.com/topics/how-to-clear-screen-in-python/
 # pands is one of many open-source libraries available with python. It is useful for data manipulation and analysis.
 # reason for \\ in file name -  https://stackoverflow.com/questions/28328052/why-do-i-have-to-use-double-backslashes-for-file-paths-in-code
+#  # keyboard pause: https://stackoverflow.com/questions/50871649/pause-python-script-wait-for-key-press
 # install pands on the system (done once in command window)
 # pip install pandas 
 
-#import libraries with identifiers "pd"
+#import libraries with identifiers e.g "pd" for pandas library 
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -22,7 +22,7 @@ import seaborn as sns
 import time # for delays 
 from PIL import Image # to display jpg files 
 import os 
-
+#intro text 
 os.system('cls')
 print("\n\nWelcome to the Fisher's Iris data set analysis program")
 time.sleep(1)
@@ -31,26 +31,22 @@ time.sleep(1)
 print("Author: Shane Keenan\nDate: 12 May 2023")
 time.sleep(1)
 print("\nThe aim of this project is to explore the capabilites of python to manipulate, analyse, display and plot data.\n")
-
+time.sleep(1)
 
 #read in the csv file from local drive 
 ''' download iris.csv data file and change this path '''
 data = pd.read_csv("C:\\Users\\shane\\Desktop\\pands\\pands-project\\iris.csv")
-
 # tidy up the data - rename the columns with formated titles
 newcols={"sepallength":"Sepal Length [cm]","sepalwidth":"Sepal Width [cm]","petallength":"Petal Length [cm]","petalwidth":"Petal Width [cm]","class":"Species"}
 # rename columns
 data = data.rename(columns=newcols)
 #list with column names for plotting
 cols = ['Sepal Length [cm]', 'Sepal Width [cm]', 'Petal Length [cm]', 'Petal Width [cm]']
-
 # define the main menu function 
 def mainMenu():
     # tidy up the data - rename the columns with formated titles
     newcols={"sepallength":"Sepal Length [cm]","sepalwidth":"Sepal Width [cm]","petallength":"Petal Length [cm]","petalwidth":"Petal Width [cm]","class":"Species"}
-    # rename columns
-    data.rename(columns=newcols, inplace=True)
-
+    data.rename(columns=newcols, inplace=True)  # rename columns
     print("MAIN MENU\n")
     print("What would you like to do with the Iris data set?")
     print("Please chose from the following options:")
@@ -87,13 +83,9 @@ Note: the Sepal is any of the outer parts of a flower that enclose and protect t
     ax2.text(1400, 1200, 'Pedal', color='white', fontsize=14, ha='left', va='top', alpha=1)
     ax1.text(0, 1500, 'Source: https://en.wikipedia.org/wiki/Iris_flower_data_set', color='black', fontsize=12, ha='left', va='top', alpha=0.5)
     ax1.text(0, 1400, 'Figure 1. Pictures of the 3 Iris species include in the Iris data set (Iris Setosa, Iris Versicolor and Iris Virginica). Labeling indicate the parts of the Iris flower measured in the data set', color='black', fontsize=12, ha='left', va='top', alpha=0.5)
-   
-    #plt.arrow(2,5,4,2,width=.3, edgecolor='green',facecolor='red',linestyle='--',linewidth=3)
     plt.show()
-    #print(f"Image format: {img.format}")
-    #print(f"Image size: {img.size}")
     os.system('cls')
-    
+ 
 def submenu_display():
     print("Display sub-menu\n")
     print("What part of raw Iris data set would you like to see?")
@@ -104,7 +96,6 @@ def submenu_display():
     print("\t(q) Return to main menu ")
     subchoice = input("please select (r/t/f/q):")
     return subchoice
-
 def display():
     os.system('cls')
     choice1 = submenu_display()
@@ -133,10 +124,7 @@ def display():
             os.system('cls')
         choice1 = submenu_display()
     input("\n\nPress Enter to return to main menu\n\n")
-    os.system('cls')
-    # keyboard pause: https://stackoverflow.com/questions/50871649/pause-python-script-wait-for-key-press
-    
-    #print(data.head())
+    os.system('cls')    
 
 def analysis():
     os.system('cls')
@@ -224,7 +212,6 @@ def submenu_plot():
     print("\t(q) return to main menu ")
     subchoice = input("please select (s/a/q):")
     return subchoice
-
 def plot():
     os.system('cls')
     
