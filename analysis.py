@@ -2,19 +2,41 @@
 # pands project   
 # Author: Shane Keenan
 # Status: complete
+
 # Resources used: 
 # Iris images and database information : https://en.wikipedia.org/wiki/Iris_flower_data_set
-# # subplot formatting: https://stackoverflow.com/questions/25862026/turn-off-axes-in-subplots
+# Iris data set analysis references # 
 # https://www.geeksforgeeks.org/python-basics-of-pandas-using-iris-dataset/  
+# https://www.geeksforgeeks.org/exploratory-data-analysis-on-iris-dataset/
+# https://realpython.com/python-statistics/
+# https://warwick.ac.uk/fac/sci/moac/people/students/peter_cock/r/iris_plots/
+# https://towardsdatascience.com/classification-basics-walk-through-with-the-iris-data-set-d46b0331bf82
+# https://www.youtube.com/watch?v=02BFXhPQWHQ
+# https://www.kaggle.com/datasets/vikrishnan/iris-dataset
+# https://www.youtube.com/watch?v=pTjsr_0YWas&t=9s 
+# 
+# general formatting and plotting references 
+# subplot formatting: https://stackoverflow.com/questions/25862026/turn-off-axes-in-subplots
 # Iris dataset as .csv and headers from https://datahub.io/machine-learning/iris#resource-iris
 # to clear terminal screen; https://www.scaler.com/topics/how-to-clear-screen-in-python/
 # pands is one of many open-source libraries available with python. It is useful for data manipulation and analysis.
 # reason for \\ in file name -  https://stackoverflow.com/questions/28328052/why-do-i-have-to-use-double-backslashes-for-file-paths-in-code
 #  # keyboard pause: https://stackoverflow.com/questions/50871649/pause-python-script-wait-for-key-press
-# install pands on the system (done once in command window)
-# pip install pandas 
+#  https://matplotlib.org/stable/gallery/lines_bars_and_markers/scatter_with_legend.html
+# text art GAME OVER - https://emojicombos.com/game-over-ascii-art
+# # https://stackoverflow.com/questions/21719063/display-entire-dataset-python
+# - scatter plots https://stackoverflow.com/questions/45862223/use-different-colors-in-scatterplot-for-iris-dataset
+# seaborn plots https://www.geeksforgeeks.org/python-seaborn-pairplot-method/
+# formatting axes https://stackabuse.com/how-to-set-axis-range-xlim-ylim-in-matplotlib/
+# scatter plots https://seaborn.pydata.org/generated/seaborn.scatterplot.html
+# scatter plots - https://realpython.com/visualizing-python-plt-scatter/
+# histogram plots - https://medium.com/@arseniytyurin/how-to-make-your-histogram-shine-69e432be39ca
+# https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax
 
-#import libraries with identifiers e.g "pd" for pandas library 
+# install pands on the system (done once in command window)
+# pip install pandas
+# pip install seaborn  
+# import libraries with identifiers e.g "pd" for pandas library 
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
