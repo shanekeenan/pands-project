@@ -53,6 +53,16 @@ From the main menu tree, there is 5 options as shown. There are sub-menus within
 (p) Scatter plots (plot()) - this option brings you to the plot sub menu from where the user can select one of two options. First option is to plot any two user selected attributes. Any attribute can be plotted on either the x or y axis of the scatter plot. 
 second option is to plot a large sub plot structured in a 4 x 4 matrix. 
 
+### file list 
+
+the github directory contains <br>
+- analysis.py <br>
+- iris data set analysis notebook.jpynb<br>
+- Iris_setosa.jpg<br>
+- Iris_versicolor.jpg<br>
+- Iris_virginica.jpg<br>
+- iris.csv<br>
+- README.md
 
 
 
