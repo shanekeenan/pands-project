@@ -27,7 +27,7 @@ The program is setup in a way to show you some of the capabilities of python to 
 
 ### MAIN MENU 
 
-The main menu structure is contained within the fumction mainMenu() and gives the options to select. The menu tree list is shown below. There are sub-menus within the display raw data (submenu_display()) and Scatter plots (submenu_plot()) options which allow the user to, for instance in the case of the Scatter plots, select which attributes that they would like to plot or plot all the data.  
+The main menu structure is contained within the fumction mainMenu() and gives the options to select. The menu tree list is shown below. 
 
 MAIN MENU
 
@@ -39,5 +39,25 @@ Please chose from the following options:<br>
         (p) Scatter plots<br>
         (q) Quit program<br>
 please select (s/d/a/p/q):s<br>
+
+### Operating instructions
+
+From the main menu tree, there is 5 options as shown. There are sub-menus within option (d) display raw data (submenu_display()) and (p) Scatter plots (submenu_plot()) 
+
+(s) See descritpion (description()) - contains information on the data set orgin and structure. This fucntion also calls and plots the 3 Iris .jpg images side by side as examples of the flowers included in the data set showing the petal and sepal parts of the flower. 
+
+(d) Display raw data (display()) - first brings the user to a display submenu (display_submenu()) which gives 3 options to either (1) display a random selection of 10 rows (2) display the top 10 rows or (3) show the full Iris dataset.  
+
+(a) Statistical plotting and analysis (analysis()) - calls the describe() function which gives a statistical analysis of each data column.Pressing enter will then plot and display 4 boxplots for each of the 4 attribues in the data set and describe its function. Subequently pressing enter will plot and display 4 histograms showing the freqency of each attribute for each flower species. Lastly pressing enter the program will generate a heatmap of the data set showing the level of correlation between the various attributes. 
+
+(p) Scatter plots (plot()) - this option brings you to the plot sub menu from where the user can select one of two options. First option is to plot any two user selected attributes. Any attribute can be plotted on either the x or y axis of the scatter plot. 
+second option is to plot a large sub plot structured in a 4 x 4 matrix. 
+
+
+
+
+
+
+
 
 

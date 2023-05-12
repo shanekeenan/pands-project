@@ -12,6 +12,7 @@
 # https://warwick.ac.uk/fac/sci/moac/people/students/peter_cock/r/iris_plots/
 # https://towardsdatascience.com/classification-basics-walk-through-with-the-iris-data-set-d46b0331bf82
 # https://www.youtube.com/watch?v=02BFXhPQWHQ
+# https://github.com/joeyajames/Python/blob/master/Iris%20Dataset/Iris_Dataset.ipynb
 # https://www.kaggle.com/datasets/vikrishnan/iris-dataset
 # https://www.youtube.com/watch?v=pTjsr_0YWas&t=9s 
 # 
@@ -71,13 +72,13 @@ def mainMenu():
     data.rename(columns=newcols, inplace=True)  # rename columns
     print("MAIN MENU\n")
     print("What would you like to do with the Iris data set?")
-    print("Please chose from the following options:")
+    print("Please choose from the following options:")
     print("\t(s) See description")
     print("\t(d) Display raw data")
     print("\t(a) Statistical plotting and analysis  ")
     print("\t(p) Scatter plots")
     print("\t(q) Quit program")
-    choice = input("please select (s/d/a/p/q):")
+    choice = input("Please select (s/d/a/p/q):")
     return choice
 
 def description():
@@ -231,7 +232,7 @@ def submenu_plot():
     print("Please chose from the following options:")
     print("\t(s) Select two variables to plot ")
     print("\t(a) Plot all attributes")
-    print("\t(q) return to main menu ")
+    print("\t(q) Return to main menu ")
     subchoice = input("please select (s/a/q):")
     return subchoice
 def plot():
@@ -242,7 +243,7 @@ def plot():
         if choice1 == "s":
             os.system('cls')
             data.rename(columns = {cols[0]:0, cols[1]:1, cols[2]:2, cols[3]:3}, inplace= True)
-            print('Scatter plotting\nPlease select what two attirbutes you would like to plot')
+            print('Scatter plotting\nPlease select which two attirbutes you would like to plot')
             print('Enter:\n\t0:Sepal length\n\t1:Sepal width\n\t2:Petal length\n\t3:Petal width')
             x = int(input("please enter x-axis variable (0-3):"))
             y = int(input("please enter y-axis variable (0-3):"))
