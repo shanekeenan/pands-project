@@ -112,7 +112,7 @@ Note: the Sepal is any of the outer parts of a flower that enclose and protect t
 def submenu_display():
     print("Display sub-menu\n")
     print("What part of raw Iris data set would you like to see?")
-    print("Please chose from the following options:")
+    print("Please choose from the following options:")
     print("\t(r) Ramdom sample of 10 rows")
     print("\t(t) Top 10 rows")
     print("\t(f) Full Iris data set")
