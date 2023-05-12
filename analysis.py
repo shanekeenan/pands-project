@@ -182,7 +182,7 @@ def analysis():
     ax[1, 1].set_title('Pedal width distribution for Iris species')
     plt.show()
     
-    input("\n\nPress Enter to see a histogram plot of data\n\n")
+    input("\n\nPlease close figure and press Enter to see a histogram plot of data\n\n")
     print(f'Histogram\nPlotting the data in a histogram allows us to easily see the frequency of certain values in the data. Here we again have broken the data into the four attributes. The three species of Iris are displayed in different colours as indicated in the legend.')
     # histogram - same format as box plot 
     fig, ax = plt.subplots(2, 2, figsize=(16, 10))
@@ -212,7 +212,7 @@ def analysis():
     ax[1, 1].set_ylabel('Frequency')
     plt.show()
 
-    input("\n\nPress Enter to see a heatmap correlation plot of the Iris data set\n\n")
+    input("\n\nPlease close figure and Press Enter to see a heatmap correlation plot of the Iris data set\n\n")
     print(f'Heatmap \nHeatmaps are particularly useful for illustrating the covariance and correlation between attributes.')
     print('From the map we can see - Petal width and petal length have high correlations\n-Petal length and sepal width have good correlations.\n-Petal Width and Sepal length have good correlations.')
     print('Conversely, Sepal length and Sepal width are poorly correlated')
@@ -221,6 +221,7 @@ def analysis():
     data.rename(columns=newcols,inplace=True)
     sns.heatmap(data.corr(method='pearson'), annot = True)
     plt.show()
+
 
 
 
